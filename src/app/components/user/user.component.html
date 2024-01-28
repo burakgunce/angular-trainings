@@ -1,0 +1,6 @@
+<ul class="list-group">
+    <h1>Users</h1>
+    <li (click)="setCurrentUser(user)" *ngFor="let user of users" [class]="getCurrentUserClass(user)">{{user.name}}</li>
+</ul>
+
+<h5 *ngIf="currentUser">{{currentUser.name}}</h5>
