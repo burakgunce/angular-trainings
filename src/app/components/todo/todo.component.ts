@@ -3,6 +3,7 @@ import { Todo } from '../../models/todo';
 
 import { TodoResponceModel } from '../../models/todoResponseModel';
 import { TodoService } from '../../services/todo.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-todo',
@@ -18,14 +19,28 @@ export class TodoComponent implements OnInit{
   //   message : "",
   //   success : true
   // };
-  constructor(private todoService:TodoService){}
+  constructor(private todoService:TodoService, private activatedRoute:ActivatedRoute){}
 
   ngOnInit(): void {
-    this.getTodos();
+    this.activatedRoute.params.subscribe(params => {
+      if (params["userId"]) {
+        this.getTodosByUser(params["userId"])
+      }
+      else{
+        this.getTodos()
+      }
+    })
   }
 
   getTodos(){
     this.todoService.getTodos().subscribe((response) => {
+      this.todos = response
+      this.dataLoaded = true;
+    })
+  }
+
+  getTodosByUser(userId:number){
+    this.todoService.getTodosByUser(userId).subscribe((response) => {
       this.todos = response
       this.dataLoaded = true;
     })
