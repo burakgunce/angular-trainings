@@ -1,7 +1,7 @@
 <ul class="list-group">
     <h1>Users</h1>
     <li (click)="setCurrentUser(user)" 
-    routerLink="/todos?UserId={{user.id}}"
+    routerLink="/todos/user/{{user.id}}"
     *ngFor="let user of users" [class]="getCurrentUserClass(user)">{{user.name}}</li>
 </ul>
 

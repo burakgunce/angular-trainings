@@ -5,7 +5,7 @@ import { TodoComponent } from './components/todo/todo.component';
 const routes: Routes = [
   {path:"",pathMatch:"full", component:TodoComponent},
   {path:"todos", component:TodoComponent},
-  {path:"todos/UserId", component:TodoComponent}
+  {path:"todos/user/:userId", component:TodoComponent}///
 ];
 
 @NgModule({
