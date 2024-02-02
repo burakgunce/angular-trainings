@@ -1,16 +1,27 @@
+<div class="mb-3">
+    <label for="filterText" class="form-label">Todo Ara</label>
+    <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="Arama ifadesi giriniz...">
+</div>
+
+<div *ngIf="filterText.length>2" class="alert alert-primary">
+    {{filterText}} aradınız
+</div>
+
 <table class="table table-success">
     <thead>
         <tr>
             <td>User Id</td>
             <td>Todo Id</td>
             <td>Title</td>
+            <td>Deneme pipe</td>
             <td>Completed</td>
         </tr>
     </thead>
-    <tr *ngFor = "let todo of todos">
+    <tr *ngFor = "let todo of todos | filterPipe:filterText">
         <td>{{todo.userId}}</td>
         <td>{{todo.id}}</td>
         <td>{{todo.title}}</td>
+        <td>{{todo.id |vatAdded:10 |currency}}</td>
         <td>{{todo.completed}}</td>
     </tr>
 </table>

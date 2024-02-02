@@ -14,6 +14,7 @@ export class TodoComponent implements OnInit{
 
   todos:Todo[] = [];
   dataLoaded = false;
+  filterText = "";
   // todoResponceModel:TodoResponceModel = {
   //   data : this.todos,
   //   message : "",
