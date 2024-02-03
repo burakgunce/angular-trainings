@@ -4,6 +4,8 @@ import { Todo } from '../../models/todo';
 import { TodoResponceModel } from '../../models/todoResponseModel';
 import { TodoService } from '../../services/todo.service';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-todo',
@@ -20,7 +22,7 @@ export class TodoComponent implements OnInit{
   //   message : "",
   //   success : true
   // };
-  constructor(private todoService:TodoService, private activatedRoute:ActivatedRoute){}
+  constructor(private todoService:TodoService, private activatedRoute:ActivatedRoute, private toastrService:ToastrService, private cartService:CartService){}
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
@@ -45,6 +47,11 @@ export class TodoComponent implements OnInit{
       this.todos = response
       this.dataLoaded = true;
     })
+  }
+
+  addToCart(todo:Todo){
+    this.toastrService.success("sepete eklendi", todo.title)
+    this.cartService.addToCart(todo);
   }
 
 }

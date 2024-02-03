@@ -1,0 +1,10 @@
+<li *ngIf="cartItems.length>0" class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Sepet
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+      <a *ngFor="let cartItem of cartItems" class="dropdown-item">{{cartItem.todo.title}}<span class="badge text-bg-secondary">{{cartItem.quantity}}</span><span (click)="removeFromCart(cartItem.todo)" class="badge text-bg-secondary">Sil</span></a>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item">Sepete Git</a>
+    </div>
+</li>

@@ -10,11 +10,12 @@
 <table class="table table-success">
     <thead>
         <tr>
-            <td>User Id</td>
-            <td>Todo Id</td>
-            <td>Title</td>
-            <td>Deneme pipe</td>
-            <td>Completed</td>
+            <th>User Id</th>
+            <th>Todo Id</th>
+            <th>Title</th>
+            <th>Deneme pipe</th>
+            <th>Completed</th>
+            <th></th>
         </tr>
     </thead>
     <tr *ngFor = "let todo of todos | filterPipe:filterText">
@@ -23,5 +24,6 @@
         <td>{{todo.title}}</td>
         <td>{{todo.id |vatAdded:10 |currency}}</td>
         <td>{{todo.completed}}</td>
+        <td><button (click)="addToCart(todo)" class="btn btn-success">Ekle</button></td>
     </tr>
 </table>
