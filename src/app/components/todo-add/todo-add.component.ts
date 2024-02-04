@@ -47,8 +47,12 @@ export class TodoAddComponent implements OnInit {
         console.log(response)
         this.toastrService.success(response.message, "Başarılı")
       }, responseError => {
-        console.log(responseError)
-        this.toastrService.error(responseError)
+        if (responseError.error.Errors.length>0) {
+          console.log(responseError.error.Errors)
+          for (let i = 0; i < responseError.error.Errors.length; i++) {
+            this.toastrService.error(responseError.error.Errors[i].ErrorMessage, "Doğrulama Hatası")
+          }
+        }
       })
       
     }
