@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { TodoService } from '../../services/todo.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-todo-add',
@@ -9,7 +11,7 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 export class TodoAddComponent implements OnInit {
   
   todoAddForm:FormGroup;
-  constructor(private formBuilder:FormBuilder){}
+  constructor(private formBuilder:FormBuilder, private todoService:TodoService, private toastrService:ToastrService){}
   
   ngOnInit(): void {
     this.createTodoAddForm();
@@ -23,5 +25,38 @@ export class TodoAddComponent implements OnInit {
       completed:["",Validators.required]
     })
   }
+
+  add(){
+    if (this.todoAddForm.valid) {
+      let todoModel = Object.assign({}, this.todoAddForm.value)
+      this.todoService.add(todoModel).subscribe(response => {
+        console.log(response)
+        this.toastrService.success("Todo Eklendi", "Başarılı")
+      })
+      
+    }
+    else{
+      this.toastrService.error("Ürün Eklenemedi", "Hata")
+    }
+  }
+
+  add2(){
+    if (this.todoAddForm.valid) {
+      let todoModel = Object.assign({}, this.todoAddForm.value)
+      this.todoService.add2(todoModel).subscribe(response => {
+        console.log(response)
+        this.toastrService.success(response.message, "Başarılı")
+      }, responseError => {
+        console.log(responseError)
+        this.toastrService.error(responseError)
+      })
+      
+    }
+    else{
+      this.toastrService.error("Ürün Eklenemedi", "Hata")
+    }
+  }
+
+
 
 }
